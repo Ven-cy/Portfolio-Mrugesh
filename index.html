@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mrugesh Patel - AI Architect</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class', // Defaulting to dark
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        // NEW THEME: Vibrant Blue
+                        primary: {
+                            '50': '#eff6ff',
+                            '100': '#dbeafe',
+                            '200': '#bfdbfe',
+                            '300': '#93c5fd',
+                            '400': '#60a5fa',
+                            '500': '#3b82f6', // Main accent
+                            '600': '#2563eb',
+                            '700': '#1d4ed8',
+                            '800': '#1e40af',
+                            '900': '#1e3a8a',
+                            '950': '#172554',
+                        },
+                        // GitHub-inspired dark grays
+                        'dark-bg': '#0d1117', // Page background
+                        'dark-card': '#161b22', // Card/Navbar background
+                        'dark-border': '#30363d', // Borders
+                        'light-text': '#e6edf3', // Primary text
+                        'medium-text': '#8b949e', // Secondary text
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.5s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+
+    <style>
+        :root {
+            --scrollbar-thumb: #3b82f6; /* blue-500 */
+            --scrollbar-track: #30363d; /* dark-border */
+        }
+        
+        html.dark {
+            --scrollbar-thumb: #3b82f6; /* blue-500 */
+            --scrollbar-track: #30363d; /* dark-border */
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--scrollbar-track);
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: var(--scrollbar-thumb);
+            border-radius: 10px;
+            border: 2px solid var(--scrollbar-track);
+        }
+
+        /* Active nav link style */
+        .nav-link.active {
+            color: #3b82f6; /* blue-500 */
+            font-weight: 600;
+        }
+        
+        /* Section observer target */
+        .section-marker {
+            display: block;
+            height: 120px; /* Adjust based on sticky nav height */
+            margin-top: -120px;
+            visibility: hidden;
+        }
+        
+        /* Project Card & Content Card Style */
+        .project-card, .content-card, .skill-card {
+            background-color: #161b22; /* dark-card */
+            border: 1px solid #30363d; /* dark-border */
+            border-radius: 8px;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+        .project-card:hover, .content-card:hover, .skill-card:hover {
+            border-color: #3b82f6; /* blue-500 */
+            transform: translateY(-4px);
+        }
+        
+        /* Skill Card Specifics */
+        .skill-card {
+            padding: 1.5rem; /* p-6 */
+            text-align: center;
+        }
+        .skill-card svg {
+            width: 48px; /* w-12 */
+            height: 48px; /* h-12 */
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 1rem; /* mb-4 */
+            color: #e6edf3; /* light-text */
+        }
+        
+    </style>
+</head>
+<body class="dark bg-dark-bg text-light-text font-sans leading-relaxed">
+
+    <header class="sticky top-0 z-50 w-full bg-dark-card/90 backdrop-blur-md border-b border-dark-border">
+        <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <a href="#home" class="text-lg font-bold text-light-text hover:text-primary-400">
+                        Mrugesh Thesiya
+                    </a>
+                </div>
+                
+                <div class="hidden md:flex md:space-x-4 lg:space-x-5">
+                    <a href="#home" class="nav-link px-2 py-2 text-sm font-medium text-medium-text hover:text-light-text transition-colors" data-section="home">Home</a>
+                    <a href="#intro" class="nav-link px-2 py-2 text-sm font-medium text-medium-text hover:text-light-text transition-colors" data-section="intro">Introduction</a>
+                    <a href="#resume" class="nav-link px-2 py-2 text-sm font-medium text-medium-text hover:text-light-text transition-colors" data-section="resume">Resume</a>
+                    <a href="#projects" class="nav-link px-2 py-2 text-sm font-medium text-medium-text hover:text-light-text transition-colors" data-section="projects">Projects</a>
+                    <a href="#skills" class="nav-link px-2 py-2 text-sm font-medium text-medium-text hover:text-light-text transition-colors" data-section="skills">Skills</a>
+                    <a href="#experience" class="nav-link px-2 py-2 text-sm font-medium text-medium-text hover:text-light-text transition-colors" data-section="experience">Experience</a>
+                    <a href="#ethics" class="nav-link px-2 py-2 text-sm font-medium text-medium-text hover:text-light-text transition-colors" data-section="ethics">Ethics</a>
+                    <a href="#future" class="nav-link px-2 py-2 text-sm font-medium text-medium-text hover:text-light-text transition-colors" data-section="future">Aspirations</a>
+                    <a href="#conclusion" class="nav-link px-2 py-2 text-sm font-medium text-medium-text hover:text-light-text transition-colors" data-section="conclusion">Conclusion</a>
+                </div>
+
+                <div class="flex items-center">
+                    <div class="md:hidden ml-2">
+                        <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-medium-text hover:bg-gray-800 focus:outline-none" aria-controls="mobile-menu" aria-expanded="false">
+                            <span class="sr-only">Open main menu</span>
+                            <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-dark-border">
+                <a href="#home" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-medium-text hover:text-light-text hover:bg-gray-800" data-section="home">Home</a>
+                <a href="#intro" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-medium-text hover:text-light-text hover:bg-gray-800" data-section="intro">Introduction</a>
+                <a href="#resume" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-medium-text hover:text-light-text hover:bg-gray-800" data-section="resume">Resume</a>
+                <a href="#projects" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-medium-text hover:text-light-text hover:bg-gray-800" data-section="projects">Projects</a>
+                <a href="#skills" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-medium-text hover:text-light-text hover:bg-gray-800" data-section="skills">Skills</a>
+                <a href="#experience" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-medium-text hover:text-light-text hover:bg-gray-800" data-section="experience">Experience</a>
+                <a href="#ethics" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-medium-text hover:text-light-text hover:bg-gray-800" data-section="ethics">Ethics</a>
+                <a href="#future" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-medium-text hover:text-light-text hover:bg-gray-800" data-section="future">Aspirations</a>
+                <a href="#conclusion" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-medium-text hover:text-light-text hover:bg-gray-800" data-section="conclusion">Conclusion</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <section id="home" class="min-h-[70vh] flex flex-col md:flex-row items-center justify-between py-24 animate-fade-in-up">
+            <span id="home-marker" class="section-marker"></span>
+            
+            <div class="md:w-3/5 text-left">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-light-text mt-2 mb-4">
+                    Mrugesh Thesiya
+                </h1>
+                <h2 class="text-2xl md:text-3xl font-medium text-medium-text mb-8">
+                    Principal AI/ML Engineer & Software Architect
+                </h2>
+                <p class="text-lg text-light-text max-w-2xl mb-10">
+                    Architecting scalable, high-performance AI platforms and full-stack solutions.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#projects" class="px-5 py-3 rounded-md bg-primary-500 text-white text-center font-semibold hover:bg-primary-600 transition-colors">
+                        View Projects
+                    </a>
+                    <a href="https://www.linkedin.com/in/mrugeshthesiya/" target="_blank" rel="noopener noreferrer" class="px-5 py-3 rounded-md bg-dark-card border border-dark-border text-light-text text-center font-semibold hover:border-light-text transition-colors flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19,3A2,2,0,0,1,21,5V19A2,2,0,0,1,19,21H5A2,2,0,0,1,3,19V5A2,2,0,0,1,5,3H19M18.5,18.5V13.2A3.26,3.26,0,0,0,15.24,9.94C14.39,9.94,13.4,10.46,13,11.18V10.13H10.13V18.5H13V13.74C13,12.83,13.25,11.94,14.38,11.94C15.5,11.94,15.75,12.93,15.75,13.82V18.5H18.5M6.88,8.56A1.68,1.68,0,0,0,8.56,6.88C8.56,6,7.78,5.2,6.88,5.2A1.69,1.69,0,0,0,5.2,6.88C5.2,7.78,6,8.56,6.88,8.56M8.25,18.5V10.13H5.5V18.5H8.25Z"></path></svg>
+                        LinkedIn
+                    </a>
+                    <a href="https://github.com/MrugeshThesiya" target="_blank" rel="noopener noreferrer" class="px-5 py-3 rounded-md bg-dark-card border border-dark-border text-light-text text-center font-semibold hover:border-light-text transition-colors flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12,2A10,10,0,0,0,2,12C2,16.42,4.87,20.17,8.84,21.5C9.34,21.58,9.5,21.27,9.5,21C9.5,20.77,9.5,20.14,9.5,19.31C6.73,19.91,6.14,17.97,6.14,17.97C5.68,16.81,5.03,16.5,5.03,16.5C4.12,15.88,5.1,15.9,5.1,15.9C6.1,15.97,6.63,16.93,6.63,16.93C7.5,18.45,8.97,18,9.54,17.76C9.63,17.11,9.89,16.67,10.17,16.42C7.95,16.17,5.62,15.31,5.62,11.5C5.62,10.39,6,9.5,6.65,8.79C6.55,8.54,6.2,7.5,6.75,6.15C6.75,6.15,7.59,5.88,9.5,7.17C10.29,6.95,11.15,6.84,12,6.84C12.85,6.84,13.71,6.95,14.5,7.17C16.41,5.88,17.25,6.15,17.25,6.15C17.8,7.5,17.45,8.54,17.35,8.79C18,9.5,18.38,10.39,18.38,11.5C18.38,15.32,16.04,16.16,13.83,16.41C14.17,16.72,14.5,17.33,14.5,18.26C14.5,19.6,14.5,20.68,14.5,21C14.5,21.27,14.66,21.59,15.17,21.5C19.14,20.16,22,16.42,22,12A10,10,0,0,0,12,2Z"></path></svg>
+                        GitHub
+                    </a>
+                </div>
+            </div>
+            
+            <div class="md:w-2/5 flex justify-center items-center mt-12 md:mt-0 md:pl-10">
+                <div class="w-64 h-64 md:w-80 md:h-80 bg-dark-card border-2 border-dark-border rounded-full flex items-center justify-center overflow-hidden">
+                    <img src="https://iili.io/Km5XC37.png" alt="Mrugesh Patel" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </section>
+        
+        <section id="intro" class="py-24 animate-fade-in-up">
+            <span id="intro-marker" class="section-marker"></span>
+            <h2 class="text-3xl font-bold text-light-text mb-6">Introduction</h2>
+            <div class="content-card p-6 md:p-8">
+                <div class="space-y-4 text-light-text">
+                    <p>
+                        Hello! I'm Mrugesh Patel, a seasoned software architect with over a decade of experience in building high-performance, scalable systems. My passion lies at the intersection of Artificial Intelligence, distributed systems, and modern web applications.
+                    </p>
+                    <p>
+                        My engineering philosophy is built on <strong class="text-primary-400">"Pragmatic Innovation."</strong> I believe in leveraging cutting-edge technology—like serverless architectures, large language models, and reactive frameworks—to solve concrete business challenges. True innovation isn't just about using the newest tool; it's about applying it intelligently to create systems that are robust, maintainable, and deliver tangible value.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="resume" class="py-24 animate-fade-in-up">
+            <span id="resume-marker" class="section-marker"></span>
+            <h2 class="text-3xl font-bold text-light-text mb-6">Resume</h2>
+            <div class="content-card p-6 md:p-8">
+                 <div id="work-experience" class="mb-12">
+                    <h3 class="text-2xl font-semibold text-white mb-6 border-l-4 border-primary-500 pl-4">Work Experience</h3>
+                    
+                    <div class="relative pl-6 mb-8 border-l border-dark-border">
+                        <span class="absolute -left-1.5 top-1.5 w-3 h-3 bg-primary-500 rounded-full"></span>
+                        <p class="text-sm text-medium-text mb-1">2020 - Present</p>
+                        <h4 class="font-semibold text-light-text text-lg">Principal AI/ML Engineer</h4>
+                        <p class="text-primary-400 mb-2">TechCorp Inc. | San Francisco, CA</p>
+                        <ul class="list-disc list-outside ml-5 text-medium-text space-y-1 text-sm">
+                            <li>Architected and led the development of a real-time fraud detection platform (VeriSentry) using Kafka, Flink, and a custom-trained ML model.</li>
+                            <li>Designed MLOps pipelines on AWS (SageMaker, S3, Lambda) to automate model training, deployment, and monitoring.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="relative pl-6 border-l border-dark-border">
+                        <span class="absolute -left-1.5 top-1.5 w-3 h-3 bg-primary-500 rounded-full"></span>
+                        <p class="text-sm text-medium-text mb-1">2016 - 2020</p>
+                        <h4 class="font-semibold text-light-text text-lg">Staff Software Engineer (Full-Stack)</h4>
+                        <p class="text-primary-400 mb-2">Innovate Solutions | Remote</p>
+                        <ul class="list-disc list-outside ml-5 text-medium-text space-y-1 text-sm">
+                            <li>Led the migration of a monolithic e-commerce backend to a microservices architecture using Node.js, Docker, and Kubernetes.</li>
+                            <li>Drove the adoption of React, Next.js, and TypeScript for the company's flagship productivity platform.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div id="education">
+                    <h3 class="text-2xl font-semibold text-white mb-6 border-l-4 border-primary-500 pl-4">Education</h3>
+                     <div class="relative pl-6 mb-6 border-l border-dark-border">
+                        <span class="absolute -left-1.5 top-1.5 w-3 h-3 bg-primary-500 rounded-full"></span>
+                        <h4 class="font-semibold text-light-text text-lg">M.S. in Computer Science (AI Specialization)</h4>
+                        <p class="text-primary-400">Stanford University | 2014 - 2016</p>
+                    </div>
+                     <div class="relative pl-6 border-l border-dark-border">
+                        <span class="absolute -left-1.5 top-1.5 w-3 h-3 bg-primary-500 rounded-full"></span>
+                        <h4 class="font-semibold text-light-text text-lg">B.Tech in Computer Engineering</h4>
+                        <p class="text-primary-400">Nirma University | 2010 - 2014</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="py-24 animate-fade-in-up">
+            <span id="projects-marker" class="section-marker"></span>
+            <h2 class="text-3xl font-bold text-light-text mb-10">Flagship Projects</h2>
+            
+            <div class="space-y-12">
+                <div class="project-card p-6 md:p-8">
+                    <div class="flex flex-wrap gap-2 mb-3">
+                        <span class="inline-block bg-primary-950 text-primary-300 text-xs font-semibold px-2.5 py-0.5 rounded-full">AI/ML</span>
+                        <span class="inline-block bg-gray-800 text-gray-300 text-xs font-semibold px-2.5 py-0.5 rounded-full">Fintech</span>
+                        <span class="inline-block bg-gray-800 text-gray-300 text-xs font-semibold px-2.5 py-0.5 rounded-full">Python</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-light-text mb-3">VeriSentry Fraud Detection</h3>
+                    <p class="text-medium-text mb-4">
+                        A real-time, AI-driven platform for detecting and preventing fraudulent financial transactions. Features sub-50ms transaction scoring using a GNN model and a full MLOps pipeline for continuous model retraining.
+                    </p>
+                    <a href="#" class="font-semibold text-primary-400 hover:text-primary-300">View Project Details &rarr;</a>
+                </div>
+                <div class="project-card p-6 md:p-8">
+                    <div class="flex flex-wrap gap-2 mb-3">
+                        <span class="inline-block bg-primary-950 text-primary-300 text-xs font-semibold px-2.5 py-0.5 rounded-full">SaaS</span>
+                        <span class="inline-block bg-gray-800 text-gray-300 text-xs font-semibold px-2.5 py-0.5 rounded-full">Next.js</span>
+                        <span class="inline-block bg-gray-800 text-gray-300 text-xs font-semibold px-2.5 py-0.5 rounded-full">TypeScript</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-light-text mb-3">AI Productivity Platform</h3>
+                    <p class="text-medium-text mb-4">
+                        A multi-tenant SaaS platform integrating LLMs for task management and document analysis. Features a monorepo structure with TypeScript for shared types between the Next.js frontend and FastAPI backend.
+                    </p>
+                    <a href="#" class="font-semibold text-primary-400 hover:text-primary-300">View Project Details &rarr;</a>
+                </div>
+                <div class="project-card p-6 md:p-8">
+                     <div class="flex flex-wrap gap-2 mb-3">
+                        <span class="inline-block bg-primary-950 text-primary-300 text-xs font-semibold px-2.5 py-0.5 rounded-full">Cybersecurity</span>
+                        <span class="inline-block bg-gray-800 text-gray-300 text-xs font-semibold px-2.5 py-0.5 rounded-full">C++</span>
+                        <span class="inline-block bg-gray-800 text-gray-300 text-xs font-semibold px-2.5 py-0.5 rounded-full">LLVM</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-light-text mb-3">LLVM Pass Obfuscator</h3>
+                    <p class="text-medium-text mb-4">
+                        A research project to build a custom LLVM pass for binary obfuscation. Implements control-flow flattening and instruction substitution to deter reverse engineering.
+                    </p>
+                    <a href="#" class="font-semibold text-primary-400 hover:text-primary-300">View Project Details &rarr;</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="py-24 animate-fade-in-up">
+             <span id="skills-marker" class="section-marker"></span>
+            <h2 class="text-3xl font-bold text-light-text mb-10">Core Technologies</h2>
+            
+            <div id="skills-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+                </div>
+        </section>
+
+        <section id="experience" class="py-24 animate-fade-in-up">
+            <span id="experience-marker" class="section-marker"></span>
+            <h2 class="text-3xl font-bold text-light-text mb-10">Experience & Leadership</h2>
+            
+            <div class="content-card p-6 md:p-8 space-y-6">
+                <div>
+                    <h4 class="text-xl font-semibold text-white">Architectural Decision-Making</h4>
+                    <p class="text-medium-text mt-2">As Principal Engineer, I am responsible for setting the technical direction for the AI platforms division. This involves authoring design documents (RFCs), evaluating new technologies, and making critical decisions, such as selecting our stream processing engine (Flink vs. Spark Streaming) and standardizing our MLOps stack.</p>
+                </div>
+                <div>
+                    <h4 class="text-xl font-semibold text-white">Mentorship and Cross-Functional Leadership</h4>
+                    <p class="text-medium-text mt-2">I lead a cross-functional "guild" of 20+ engineers focused on AI/ML best practices. We conduct weekly architecture reviews and knowledge-sharing sessions. A key challenge I resolved was bridging the communication gap between the data science (Python) and platform (Java/Go) teams. I championed the use of gRPC and Protobuf to create language-agnostic service contracts, significantly reducing integration friction.</p>
+                </div>
+                <div>
+                    <h4 class="text-xl font-semibold text-white">Achievements and Impact</h4>
+                    <p class="text-medium-text mt-2">My most significant contribution was designing the "VeriSentry" platform, which now processes over $10B in transactions daily. By leading the technical design and mentoring the team, we delivered the project 15% ahead of schedule and it now blocks over $50M in fraudulent transactions annually.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="ethics" class="py-24 animate-fade-in-up">
+            <span id="ethics-marker" class="section-marker"></span>
+            <h2 class="text-3xl font-bold text-light-text mb-6">Ethical AI & System Design</h2>
+            
+            <div class="content-card p-6 md:p-8">
+                <p class="text-lg text-light-text mb-6">
+                    Building systems that make automated decisions, especially in AI, carries an immense ethical weight. My design philosophy is grounded in creating systems that are not only powerful but also <strong class="text-primary-400">fair, transparent, and secure</strong>.
+                </p>
+                <div class="space-y-6">
+                    <div>
+                        <h4 class="text-xl font-semibold text-white">Case Study: Model Bias in Fraud Detection</h4>
+                        <p class="text-medium-text mt-2">
+                            <strong class="text-light-text">Scenario:</strong> In developing VeriSentry, our initial model showed a higher false-positive rate for transactions from specific geographic regions.
+                            <br>
+                            <strong class="text-light-text">Analysis & Reflection:</strong> I mandated the integration of an "AI Fairness 360" toolkit into our MLOps pipeline. We now actively monitor and report on model fairness metrics (e.g., disparate impact) and use techniques like adversarial debiasing to mitigate bias before a model is promoted to production.
+                        </p>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-semibold text-white">Global Perspective: Data Sovereignty</h4>
+                        <p class="text-medium-text mt-2">
+                            <strong class="text-light-text">Influence:</strong> Deploying the SaaS platform globally required us to handle data privacy laws like GDPR (EU) and CCPA (California).
+                            <br>
+                            <strong class="text-light-text">Analysis & Reflection:</strong> This forced us to architect our system for data sovereignty from day one. We designed a multi-region architecture on AWS, ensuring that user data could be pinned to specific geographic regions (e.g., EU data stays in the Frankfurt region).
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="future" class="py-24 animate-fade-in-up">
+            <span id="future-marker" class="section-marker"></span>
+            <h2 class="text-3xl font-bold text-light-text mb-6">Future Aspirations</h2>
+            
+            <div class="content-card p-6 md:p-8">
+                <p class="text-lg text-light-text mb-6">
+                    My primary goal is to continue to operate at the nexus of <strong class="text-primary-400">AI and Systems Architecture</strong>. I aim to not only build AI products but to build the next generation of platforms that make AI accessible, reliable, and efficient for all developers.
+                </p>
+                
+                <h4 class="text-xl font-semibold text-white">Areas for Deeper Research:</h4>
+                <ul class="list-disc list-outside ml-5 text-medium-text space-y-2 mt-3">
+                    <li><strong class="text-light-text">Edge AI:</strong> Researching and developing systems to run complex ML models efficiently on edge devices (e.g., using LLVM, MLIR, and custom hardware).</li>
+                    <li><strong class="text-light-text">Distributed AI:</strong> Exploring techniques for large-scale distributed training and federated learning to build more powerful and private AI models.</li>
+                    <li><strong class="text-light-text">Rust & Systems Programming:</strong> Deepening my expertise in Rust to build high-performance, memory-safe backend services for AI inference.</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section id="conclusion" class="py-24 animate-fade-in-up">
+            <span id="conclusion-marker" class="section-marker"></span>
+            
+            <div class="content-card p-6 md:p-8 text-left">
+                <h3 class="text-2xl font-bold text-light-text mb-4">Conclusion & Self-Assessment</h3>
+                <p class="text-lg text-medium-text">
+                    This portfolio represents more than just a collection of projects; it's a snapshot of my architectural journey. Building each system, from the real-time fraud pipeline in **VeriSentry** to the full-stack, type-safe **AI Productivity Platform**, has reinforced invaluable lessons in system design, scalability, and the critical importance of reliability. My initial goal was to become "good at building AI," but this journey has broadened my perspective. I now understand that being a good **architect** means designing systems that are not only powerful but also resilient, maintainable, secure, and built with a deep understanding of their ethical impact.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="border-t border-dark-border mt-16">
+        <div class="max-w-6xl mx-auto py-8 px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-medium-text">
+                &copy; 2025 Mrugesh Patel. All rights reserved.
+            </p>
+            <div class="flex space-x-6">
+                <a href="https://github.com/mrugesh" target="_blank" rel="noopener noreferrer" class="text-medium-text hover:text-primary-400" aria-label="GitHub">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12,2A10,10,0,0,0,2,12C2,16.42,4.87,20.17,8.84,21.5C9.34,21.58,9.5,21.27,9.5,21C9.5,20.77,9.5,20.14,9.5,19.31C6.73,19.91,6.14,17.97,6.14,17.97C5.68,16.81,5.03,16.5,5.03,16.5C4.12,15.88,5.1,15.9,5.1,15.9C6.1,15.97,6.63,16.93,6.63,16.93C7.5,18.45,8.97,18,9.54,17.76C9.63,17.11,9.89,16.67,10.17,16.42C7.95,16.17,5.62,15.31,5.62,11.5C5.62,10.39,6,9.5,6.65,8.79C6.55,8.54,6.2,7.5,6.75,6.15C6.75,6.15,7.59,5.88,9.5,7.17C10.29,6.95,11.15,6.84,12,6.84C12.85,6.84,13.71,6.95,14.5,7.17C16.41,5.88,17.25,6.15,17.25,6.15C17.8,7.5,17.45,8.54,17.35,8.79C18,9.5,18.38,10.39,18.38,11.5C18.38,15.32,16.04,16.16,13.83,16.41C14.17,16.72,14.5,17.33,14.5,18.26C14.5,19.6,14.5,20.68,14.5,21C14.5,21.27,14.66,21.59,15.17,21.5C19.14,20.16,22,16.42,22,12A10,10,0,0,0,12,2Z"></path></svg>
+                </a>
+                <a href="https://linkedin.com/in/mrugesh" target="_blank" rel="noopener noreferrer" class="text-medium-text hover:text-primary-400" aria-label="LinkedIn">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19,3A2,2,0,0,1,21,5V19A2,2,0,0,1,19,21H5A2,2,0,0,1,3,19V5A2,2,0,0,1,5,3H19M18.5,18.5V13.2A3.26,3.26,0,0,0,15.24,9.94C14.39,9.94,13.4,10.46,13,11.18V10.13H10.13V18.5H13V13.74C13,12.83,13.25,11.94,14.38,11.94C15.5,11.94,15.75,12.93,15.75,13.82V18.5H18.5M6.88,8.56A1.68,1.68,0,0,0,8.56,6.88C8.56,6,7.78,5.2,6.88,5.2A1.69,1.69,0,0,0,5.2,6.88C5.2,7.78,6,8.56,6.88,8.56M8.25,18.5V10.13H5.5V18.5H8.25Z"></path></svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <button id="back-to-top" class="hidden fixed bottom-6 right-6 p-3 rounded-full bg-primary-500 text-white hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-dark-bg transition-opacity duration-300 shadow-lg">
+        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+        </svg>
+    </button>
+    
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- Default to dark mode (as toggle is removed) ---
+            document.documentElement.classList.add('dark');
+
+            // --- Mobile Menu Toggle ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            mobileMenuButton.addEventListener('click', () => {
+                const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+                mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // --- Active Nav Link Highlighting on Scroll ---
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('a.nav-link');
+            
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.3 // 30% of the section must be visible
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                let activeSectionId = null;
+                
+                 // Find the topmost visible section
+                for (let i = entries.length - 1; i >= 0; i--) {
+                    if (entries[i].isIntersecting) {
+                        activeSectionId = entries[i].target.id;
+                        break;
+                    }
+                }
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('data-section') === activeSectionId) {
+                        link.classList.add('active');
+                    }
+                });
+                
+                // Manually activate "Home" if near the top
+                if (window.scrollY < 400) {
+                     navLinks.forEach(link => link.classList.remove('active'));
+                     document.querySelector('a.nav-link[data-section="home"]').classList.add('active');
+                }
+            }, observerOptions);
+
+            sections.forEach(section => {
+                const marker = document.getElementById(`${section.id}-marker`);
+                if(marker) {
+                    observer.observe(marker);
+                }
+            });
+            
+             // Manually set first link as active on load
+             if (window.scrollY < 400) {
+                 document.querySelector('a.nav-link[data-section="home"]').classList.add('active');
+             }
+
+            // --- Back to Top Button ---
+            const backToTopButton = document.getElementById('back-to-top');
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    backToTopButton.classList.remove('hidden');
+                    backToTopButton.classList.add('inline-flex');
+                } else {
+                    backToTopButton.classList.add('hidden');
+                    backToTopButton.classList.remove('inline-flex');
+                }
+            });
+
+            backToTopButton.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // --- Smooth Scrolling for all hash links ---
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                        // Close mobile menu on click
+                        if (!mobileMenu.classList.contains('hidden')) {
+                             mobileMenuButton.click();
+                        }
+                    }
+                });
+            });
+
+            // --- Animate elements on scroll ---
+            const animatedElements = document.querySelectorAll('.animate-fade-in-up');
+            
+            const animateObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        animateObserver.unobserve(entry.target); // Only animate once
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            animatedElements.forEach(el => {
+                // Set initial state for JS-driven animation
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+                animateObserver.observe(el);
+            });
+            
+            // --- Skills Grid Population ---
+            const skills = [
+                { 
+                    name: 'Python', 
+                    svg: '<svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.22 8.64c-.2-.17-.46-.22-.72-.15l-5.5 1.38c-.24.06-.45.21-.59.42l-2.03 3.04c-.14.21-.21.46-.21.72 0 .26.07.5.21.7l2.03 3.04c.14.21.35.36.59.42l5.5 1.38c.26.07.52.02.72-.15.2-.17.31-.42.31-.68v-2.14c0-.26-.07-.5-.21-.7l-2.03-3.04c-.14-.21-.35-.36-.59-.42l-2.4-.6 2.4-.6c.24-.06.45-.21.59-.42l2.03-3.04c.14-.21.21-.46.21-.7V9.32c0-.26-.11-.51-.31-.68zm-6.24 7.6l-1.28-1.92c-.06-.09-.09-.2-.09-.3 0-.11.03-.21.09-.3l1.28-1.92c.06-.09.15-.15.26-.18l3.47-.87-3.47-.87c-.11-.03-.2-.09-.26-.18L8.7 8.16c-.06-.09-.09-.2-.09-.3 0-.11.03-.21.09-.3l1.28-1.92c.06-.09.15-.15.26-.18l3.47-.87v11.7l-3.47-.87c-.11-.03-.2-.09-.26-.18z"/></svg>',
+                    description: 'Core language for ML, data analysis, and backend services (FastAPI).'
+                },
+                { 
+                    name: 'PyTorch', 
+                    svg: '<svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.057 16.943a1.429 1.429 0 1 1-2.857 0 1.429 1.429 0 0 1 2.857 0zM12 18.371a2.857 2.857 0 1 0 0-5.714 2.857 2.857 0 0 0 0 5.714zm0-7.143a1.429 1.429 0 1 1 0-2.857 1.429 1.429 0 0 1 0 2.857zM8.486 9.943a1.429 1.429 0 1 1-2.857 0 1.429 1.429 0 0 1 2.857 0zM12 7.086a2.857 2.857 0 1 0 0-5.714 2.857 2.857 0 0 0 0 5.714zm0-7.143a1.429 1.429 0 1 1 0-2.857 1.429 1.429 0 0 1 0 2.857zM16.943 16.943a1.429 1.429 0 1 1-2.857 0 1.429 1.429 0 0 1 2.857 0zM15.514 9.943a1.429 1.429 0 1 1-2.857 0 1.429 1.429 0 0 1 2.857 0zM12 24a2.857 2.857 0 1 0 0-5.714 2.857 2.857 0 0 0 0 5.714z"/></svg>',
+                    description: 'Primary deep learning framework for model training and research.'
+                },
+                { 
+                    name: 'Next.js', 
+                    svg: '<svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2.071 18.75l-2.064-3.574h-1.365v3.574h-2.5v-13.5h5.455c2.932 0 4.209 1.159 4.209 3.682 0 1.682-.768 2.782-2.114 3.336l2.368 6.482h-2.821l-2.168-5.918h-.99v5.918zm0-8.25h1.077c1.139 0 1.768-.4 1.768-1.341 0-.96-.652-1.359-1.813-1.359h-1.032v2.7z"/></svg>',
+                    description: 'For building high-performance, server-rendered React applications.'
+                },
+                { 
+                    name: 'TypeScript', 
+                    svg: '<svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0zm17.563 9.438l.438-4.375H5.188l.375 4.375h13.5zm-5.375 7.25l4.625-2.625.375-4.25H9.688l.313 3.5 4.688 2.625 4.75-2.625.375-4.375H5.188l.75 8.75L12 20.313l7.063-2.625z"/></svg>',
+                    description: 'Enforcing type-safety across the full stack (React & Node).'
+                },
+                { 
+                    name: 'React', 
+                    svg: '<svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"/><path d="M12 7.098c-2.31 0-4.288 1.442-5.34 3.63-1.042 2.167-.533 4.771 1.251 6.362 1.784 1.59 4.33 1.956 6.64 1.055 2.31-.901 4.288-2.842 5.34-5.029 1.052-2.188.544-4.792-1.251-6.383C16.855 5.14 14.31 4.773 12 5.674c-1.155.45-2.193 1.155-3.082 2.044m4.682-1.43c.96.38 1.83.95 2.56 1.68s1.29 1.6 1.68 2.56c-.51-2.4-2.28-4.42-4.51-5.32-1.11-.43-2.31-.6-3.48-.49.38.96.95 1.83 1.68 2.56s1.6 1.29 2.56 1.68c.03-.71.03-1.42.03-2.14 0-.8-.11-1.59-.32-2.35m-5.172 8.71c-.96-.38-1.83-.95-2.56-1.68s-1.29-1.6-1.68-2.56c.51 2.4 2.28 4.42 4.51 5.32 1.11.43 2.31.6 3.48.49-.38-.96-.95-1.83-1.68-2.56s-1.6-1.29-2.56-1.68c-.03.71-.03 1.42-.03 2.14 0 .8.11 1.59.32 2.35m7.84-2.92c-.38-.96-.95-1.83-1.68-2.56s-1.6-1.29-2.56-1.68c.43 1.11.6 2.31.49 3.48-.38.96-.95 1.83-1.68 2.56s-1.6 1.29-2.56 1.68c-.03.71-.03 1.42-.03 2.14 2.4-.51 4.42-2.28 5.32-4.51.43-1.11.6-2.31.49-3.48z"/></svg>',
+                    description: 'Building interactive UIs, dashboards, and internal tools.'
+                },
+                { 
+                    name: 'Node.js', 
+                    svg: '<svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.33 1.03v9.42l-2.83 2.1-3.52-2.67.62-4.14-2.07-1.3-.02 8.52L0 11.23v1.54l3.49 2.65L2.3 22.97h2.24l1.04-8.04 2.75 2.06.01 6.01h2.24V1.03h-2.25zM20.47 14.1c0 1.94-1.3 3.51-3.32 3.51h-2.98v-7.01h2.98c2.02 0 3.32 1.57 3.32 3.5zM12 11.75v9.26h3.14c3.23 0 5.58-2.34 5.58-5.74 0-3.37-2.35-5.71-5.58-5.71H12v2.19z"/></svg>',
+                    description: 'Developing microservices and backend logic for full-stack apps.'
+                },
+                { 
+                    name: 'AWS', 
+                    svg: '<svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.42 16.27c.2 0 .4-.04.6-.11.4-.15.6-.5.6-1.03v-4.39c0-.52-.2-.88-.6-1.03-.2-.07-.4-.11-.6-.11-.42 0-.78.16-1.09.47L2.61 11.7c-.21.22-.32.48-.32.77 0 .29.11.55.32.77l1.72 1.63c.31.31.67.47 1.09.47zm8.47 2.13c-.34.3-.77.45-1.29.45-.66 0-1.25-.2-1.76-.6l-.16-.13-1.68 1.6c.73.6 1.62.9 2.67.9.95 0 1.8-.26 2.54-.78.75-.52 1.13-1.25 1.13-2.17 0-.91-.4-1.64-1.2-2.18-.8-.54-1.92-.81-3.36-.81h-1.4v-1.7h1.3c1.03 0 1.87-.19 2.52-.57.65-.38.98-.95.98-1.71 0-.6-.19-1.08-.57-1.45-.38-.37-.88-.55-1.5-.55-.61 0-1.12.17-1.53.5l-1.6-1.62c.7-.5 1.5-.75 2.4-.75.9 0 1.68.27 2.34.8.66.53 1 1.25 1 2.15 0 .68-.21 1.25-.63 1.71-.42.46-.98.78-1.68.98.5.15.9.36 1.18.63.29.27.43.6.43.99 0 .5-.13.94-.4 1.31zm8.01-11.23c-.34-.3-.78-.45-1.3-.45-.66 0-1.25.2-1.76.6l-.16.13-1.68-1.6c.73-.6 1.62-.9 2.67-.9.95 0 1.8-.26 2.54-.78.75.52 1.13 1.25 1.13 2.17 0 .91-.4 1.64-1.2 2.18-.8.54-1.92-.81-3.36.81h-1.4v1.7h1.3c1.03 0 1.87.19 2.52.57.65.38.98.95.98 1.71 0 .6-.19-1.08-.57-1.45-.38-.37-.88-.55-1.5.55-.61 0-1.12.17-1.53.5l-1.6 1.62c.7.5 1.5.75 2.4.75.9 0 1.68.27 2.34-.8.66.53 1-1.25 1-2.15 0-.68-.21-1.25-.63-1.71-.42-.46-.98-.78-1.68-.98.5-.15.9-.36 1.18-.63.29.27.43-.6.43-.99 0-.5-.13-.94-.4-1.31z"/></svg>',
+                    description: 'Primary cloud provider (SageMaker, S3, EC2, Lambda) for MLOps.'
+                },
+                { 
+                    name: 'Docker', 
+                    svg: '<svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22.12 6.39c-.11-.3-.3-.55-.54-.72l-1.42-.99c-.2-.14-.45-.22-.71-.22h-3.44c-.26 0-.51.08-.71.22l-1.42.99c-.24.17-.43.42-.54.72L12 9.77v3.08l-1.42-.99c-.2-.14-.45-.22-.71-.22H6.43c-.26 0-.51.08-.71.22L4.3 13.07c-.24.17-.43.42-.54.72L2 17.16c-.05.15-.08.3-.08.45v1.31c0 .55.45 1 1 1h4.5c.55 0 1-.45 1-1v-1.31c0-.15-.03-.3-.08-.45L6.43 14.8v-1.71l1.42-.99c.2-.14.45-.22.71-.22h3.44c.26 0 .51.08.71.22l1.42.99v1.71l-1.42.99c-.2.14-.45.22-.71-.22H7.5c-.55 0-1 .45-1 1v1.31c0 .15.03.3.08.45l1.84 3.37c.11.3.3.55.54.72l1.42.99c.2.14.45.22.71-.22h3.44c.26 0 .51.08.71.22l1.42-.99c.24-.17.43-.42.54-.72l1.84-3.37c.05-.15.08-.3.08-.45v-1.31c0-.55-.45-1-1-1h-3.44c-.26 0-.51.08-.71.22l-1.42.99v-1.71l1.42-.99c.2-.14.45-.22.71-.22h3.44c.26 0 .51.08.71.22l1.42.99v1.71l-1.42.99c-.2.14-.45-.22-.71-.22h-3.44c-.55 0-1 .45-1 1v1.31c0 .15.03.3.08.45l1.84 3.37c.11.3.3.55.54.72l1.42.99c.2.14.45.22.71-.22h3.44c.26 0 .51.08.71.22l1.42-.99c.24-.17.43-.42.54-.72l1.84-3.37c.05-.15.08-.3.08-.45v-1.31c0-.55-.45-1-1-1h-3.44c-.26 0-.51.08-.71.22l-1.42.99v-3.08l1.42-.99c.2-.14.45-.22.71-.22h3.44c.26 0 .51.08.71.22l1.42.99c.24.17.43.42.54.72l1.36 3.38v-3.08l-1.36-3.38zM8.64 5.2H7.22V3.78H8.64V5.2zm2.86 0h-1.42V3.78h1.42V5.2zm2.86 0h-1.42V3.78h1.42V5.2zm2.86 0h-1.42V3.78h1.42V5.2z"/></svg>',
+                    description: 'Containerizing applications for consistent deployment.'
+                },
+                { 
+                    name: 'Kubernetes', 
+                    svg: '<svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1.34c.1-.002.19-.002.29 0l7.34 3.96c.27.15.44.42.44.73v7.94c0 .31-.17.58-.44.73l-7.34 3.96c-.1.05-.2.05-.3 0l-7.34-3.96c-.27-.15-.44-.42-.44-.73V6.03c0-.31.17-.58.44-.73l7.34-3.96h.05zm-.15 2.05L5.4 6.87v6.26l6.46 3.48 6.46-3.48V6.87l-6.46-3.48zM12 11.1c-.22 0-.42.06-.6.18-.18.12-.32.3-.4.51l-2.6 6.13c-.08.19-.08.39 0 .58.08.19.22.34.4.45.18.11.39.17.6.17.22 0 .42-.06.6-.18.18-.12.32.3-.4.51l2.6-6.13c.08-.19.08-.39 0-.58-.08-.19-.22-.34-.4-.45-.18-.11-.39-.17-.6-.17zm0 1.32c.02 0 .04 0 .05.02.02.01.03.03.04.05l2.6 6.13c.01.03.01.06 0 .09-.01.03-.03.05-.05.06-.02.01-.05.02-.07.02-.02 0-.04 0-.05-.02-.02-.01-.03-.03-.04-.05l-2.6-6.13c-.01-.03-.01-.06 0-.09.01-.03.03-.05.05-.06.02-.01.05-.02.07-.02z"/></svg>',
+                    description: 'Orchestrating containerized services for high availability.'
+                },
+                { 
+                    name: 'C++', 
+                    svg: '<svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.5 13.5h-3v3h-2v-3h-3v-2h3v-3h2v3h3v2zm-1.5-6.5c0 .3-.02.59-.06.88l.88.88C12.92 8.48 13 8.1 13 7.71c0-2.26-1.55-4.13-3.56-4.58l.84.84c1.47.38 2.59 1.69 2.71 3.23.01.1.01.2.01.3zM8.33 4.09c-.11.02-.22.03-.33.03-.3 0-.59-.02-.88-.06l-.88-.88C6.52 3.08 6.9 3 7.29 3c2.26 0 4.13 1.55 4.58 3.56l-.84-.84C10.55 4.25 9.24 3.13 7.71 3.01c-.1 0-.2-.01-.3-.01zM10.21 12l-1.03-1.03c-.3-.3-.77-.3-1.06 0s-.3.77 0 1.06L9.15 13H7.71c-.3 0-.59.02-.88.06l-.88.88c.28.04.58.06.88.06 2.26 0 4.13-1.55 4.58-3.56l-.84-.84c-.38 1.47-1.69 2.59-3.23 2.71-.1 0-.2.01-.3.01H10.21zM12 10.21l1.03 1.03c.3.3.77.3 1.06 0s.3-.77 0-1.06L13 9.15V7.71c.3 0 .59-.02.88-.06l.88-.88c-.28-.04-.58-.06-.88-.06-2.26 0-4.13 1.55-4.58 3.56l.84.84c.38-1.47 1.69 2.59 3.23 2.71.1 0 .2-.01.3-.01V10.21zM18 13.5h-3v3h-2v-3h-3v-2h3v-3h2v3h3v2z"/></svg>',
+                    description: 'For high-performance computing and compiler-level projects (LLVM).'
+                },
+                { 
+                    name: 'FastAPI', 
+                    svg: '<svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm3.32 17.15c-.14 0-.28-.02-.4-.06l-4.7-2.01-.01.01c-.13-.05-.24-.13-.33-.24a.83.a3 0 0 1-.21-.35l-1.74-4.78a.86.86 0 0 1 .15-.84c.1-.1.22-.17.36-.2l4.8-1.99c.12-.05.26-.07.39-.07.37 0 .7.21.82.53l1.74 4.79c.07.19.08.38.04.57-.04.19-.14.36-.28.49l-1.77 1.77c-.1.1-.22.17-.36.2l-2.02.83h.02zm-.61-8.23l-3.23 1.34 1.17 3.21 3.23-1.34-1.17-3.21zM9.59 9.38l-1.44.6 2.02 5.51 1.44-.6-2.02-5.51z"/></svg>',
+                    description: 'Building modern, async Python backends for AI/ML models.'
+                },
+                { 
+                    name: 'Git', 
+                    svg: '<svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22.06 10.15c-.21-.21-.49-.32-.77-.32h-3.32v-1.3c0-1.13-.92-2.05-2.05-2.05h-1.3V3.16c0-.33-.27-.6-.6-.6s-.6.27-.6.6v3.32h-3.32c-.33 0-.6.27-.6.6s.27.6.6.6h3.32v1.3H8.03c-1.13 0-2.05.92-2.05 2.05v1.3H2.66c-.28 0-.56.11-.77.32-.21.21-.32.49-.32.77 0 .28.11.56.32.77l5.05 5.05c.21.21.49.32.77.32h.2c.28 0 .56-.11.77-.32l2.35-2.35v3.13c0 .33.27.6.6.6s.6-.27.6-.6v-3.13l2.35 2.35c.21.21.49.32.77.32.28 0 .56-.11.77-.32l5.05-5.05c.21-.21.32-.49.32-.77 0-.28-.11-.56-.32-.77zM12 14.47l-2.35-2.35h4.7L12 14.47zM9.33 10.92c-.44 0-.8-.36-.8-.8s.36-.8.8-.8.8.36.8.8-.36.8-.8.8zm5.34 0c-.44 0-.8-.36-.8-.8s.36-.8.8-.8.8.36.8.8-.36.8-.8.8z"/></svg>',
+                    description: 'Version control and collaborative development using GitFlow.'
+                }
+            ];
+            
+            const skillsGrid = document.getElementById('skills-grid');
+            
+            skills.forEach(skill => {
+                const cardHtml = `
+                    <div class="skill-card">
+                        ${skill.svg}
+                        <h3 class="text-xl font-semibold text-light-text mb-2">${skill.name}</h3>
+                        <p class="text-medium-text text-sm">${skill.description}</p>
+                    </div>
+                `;
+                skillsGrid.innerHTML += cardHtml;
+            });
+
+        });
+    </script>
+
+</body>
+</html>
